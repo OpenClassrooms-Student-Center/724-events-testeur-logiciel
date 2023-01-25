@@ -1,0 +1,26 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+require('dotenv').config()
+const app = express();
+const eventsRoutes = require('./routes/events');
+const contactRoutes = require('./routes/contact');
+const inscriptionRoutes = require('./routes/inscription');
+mongoose.connect(`mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/m77events?authSource=admin`,
+    { useNewUrlParser: true,
+        useUnifiedTopology: true })
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'));
+app.use(express.json());
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    next();
+});
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/api/contact', contactRoutes);
+app.use('/api/inscription', inscriptionRoutes);
+app.use('/api/events', eventsRoutes);
+
+module.exports = app;
