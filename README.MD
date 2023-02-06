@@ -1,4 +1,4 @@
-# 77events
+# 724events
 
 ## Prerequisites
 You need Docker to launch the app or launch each services independently ( MongoDB, FrontEnd and Backend)
