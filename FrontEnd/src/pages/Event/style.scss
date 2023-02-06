@@ -52,6 +52,13 @@ main {
     &Periode {
       font-size: 14px;
     }
+    &Map {
+      font-size: 14px;
+      a {
+        color: white;
+      }
+
+    }
   }
   margin-bottom: 32px;
   &__imageContainer {

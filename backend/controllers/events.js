@@ -27,8 +27,9 @@ exports.getEventById = async (req, res, next) => {
 
 exports.getLastEvent = async (req, res, next) => {
     try{
-        const events = await Event.findAll()
-        const last = events[events.length -1]
+        const events = await Event.find()
+        const last = events.filter((evt) => new Date(evt.date).getTime() < new Date.getTime())
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
         return res.status(200).json(last)
     }catch(e){
         console.log('err', e)

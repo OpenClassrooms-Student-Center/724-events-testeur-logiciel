@@ -1,5 +1,7 @@
+import {useState, useEffect} from "react";
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
+
 import EventCard from "../../components/EventCard";
 import PeopleCard from "../../components/PeopleCard";
 
@@ -7,13 +9,20 @@ import "./style.scss";
 import EventList from "../../containers/Events";
 import Slider from "../../containers/Slider";
 import Logo from "../../components/Logo";
-import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
+import ModalEvent from "../../containers/ModalEvent";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const [last, setLast] = useState(undefined);
+  const {data} = useData();
+  useEffect(() => {
+    if (data) {
+      setLast(data.last);
+    }
+  }, [data]);
+  console.log('last', last)
   return <>
     <header>
       <Menu />
@@ -22,7 +31,7 @@ const Page = () => {
       <section className="SliderContainer">
         <Slider />
       </section>
-      <section className="ServicesContainer">
+      <section id="nos-services" className="ServicesContainer">
         <h2 className="Title">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
@@ -51,11 +60,11 @@ const Page = () => {
           </ServiceCard>
         </div>
       </section>
-      <section className="EventsContainer">
-        <h2 className="Title">Nos réalisations</h2>
+      <section id="nos-realisations" className="EventsContainer">
+        <h2 className="">Nos réalisations</h2>
         <EventList />
       </section>
-      <section className="PeoplesContainer">
+      <section id="notre-equipe" className="PeoplesContainer">
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
@@ -116,33 +125,25 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
-          small
-          label="boom"
-        />
+        {last &&
+        <Modal key={last.id} Content={<ModalEvent event={last.id} />}>
+          {({ setIsOpened }) => (
+              <EventCard
+                  onClick={() => setIsOpened(true)}
+                  imageSrc={last.cover}
+                  title={last.title}
+                  date={new Date(last.date)}
+                  label={last.type}
+              />
+          )}
+        </Modal>
+        }
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
         <address>45 avenue de la République, 75000 Paris</address>
         <div>01 23 45 67 89</div>
         <div>contact@77events.com</div>
-        <div>
-          <a href="#twitch">
-            <Icon name="twitch" />
-          </a>
-          <a href="#facebook">
-            <Icon name="facebook" />
-          </a>
-          <a href="#twitter">
-            <Icon name="twitter" />
-          </a>
-          <a href="#youtube">
-            <Icon name="youtube" />
-          </a>
-        </div>
       </div>
       <div className="col description">
         <Logo size="large" />

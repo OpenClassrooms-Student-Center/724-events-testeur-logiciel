@@ -32,7 +32,7 @@ const Form = ({ onSuccess, onError, date, id }) => {
       setSending(true);
       // We try to call mockContactApi
       try {
-        await fetch('http://localhost/api/inscription', {
+        await fetch('http://localhost:8080/api/inscription', {
             method: 'POST',
             body: JSON.stringify(contact),
             headers: {

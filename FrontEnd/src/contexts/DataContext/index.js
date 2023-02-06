@@ -8,19 +8,23 @@ import {
 } from "react";
 
 const DataContext = createContext({});
-
+const getLastEvent = (events) => {
+  const now = new Date();
+  const last = events
+      .filter((evt) => new Date(evt.date).getTime() < now.getTime())
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+  return last
+}
 export const api = {
   loadData: async () => {
     // const json = await fetch("/events.json");
     const data = {}
-    const json = await fetch("http://localhost/api/events");
+    const json = await fetch("http://localhost:8080/api/events");
     data.events =  await json.json();
     console.log('filter', data.events.filter(evt => new Date(evt.date).getTime() > Date.now ))
     data.focus = data.events.filter(evt => (new Date(evt.date)).getTime() > Date.now() )
     console.log(data);
-    const lastJson = await fetch("http://localhost/api/events/last")
-    const last = await lastJson.json()
-    data.last = last
+    data.last = getLastEvent(data.events)
     return data
   },
 };

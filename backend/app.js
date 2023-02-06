@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const swaggerUi = require('swagger-ui-express');
+const yaml = require('yamljs');
 require('dotenv').config()
 const app = express();
-const eventsRoutes = require('./routes/events');
-const contactRoutes = require('./routes/contact');
-const inscriptionRoutes = require('./routes/inscription');
+const swaggerDocs = require('./swagger_output.json')
+const routes = require('./routes/index');
 mongoose.connect(`mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/m77events?authSource=admin`,
     { useNewUrlParser: true,
         useUnifiedTopology: true })
@@ -19,8 +20,8 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/api/contact', contactRoutes);
-app.use('/api/inscription', inscriptionRoutes);
-app.use('/api/events', eventsRoutes);
 
+app.use('/api/', routes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+//app.use('/', (req, res) => { res.status(200).json({ message: 'Bienvenue sur l\'API de M77 Events !' })});
 module.exports = app;

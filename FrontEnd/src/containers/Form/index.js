@@ -22,7 +22,7 @@ const Form = ({ onSuccess, onError }) => {
       setSending(true);
       // We try to call mockContactApi
       try {
-        await fetch('http://localhost/api/contact', {
+        await fetch('http://localhost:8080/api/contact', {
             method: 'POST',
             body: JSON.stringify(contact),
             headers: {
@@ -46,9 +46,9 @@ const Form = ({ onSuccess, onError }) => {
           <Field placeholder="" label="Nom" />
           <Field placeholder="" label="Prénom" />
           <Select
-            selection={["Personel", "Entreprise"]}
+            selection={["Personnel", "Entreprise"]}
             onChange={() => null}
-            label="Personel / Entreprise"
+            label="Personnel / Entreprise"
             type="large"
             titleEmpty
           />
