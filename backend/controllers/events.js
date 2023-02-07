@@ -1,6 +1,8 @@
 const Event = require('./../models/Events')
 
 exports.getEvents = async (req, res, next) => {
+    /*  #swagger.tags = ['Events']
+        #swagger.description = 'Endpoint to get all events information.' */
     try{
         const events = await Event.find()
         const formattedEvents = events.map(e => {
@@ -16,6 +18,8 @@ exports.getEvents = async (req, res, next) => {
     }
 }
 exports.getEventById = async (req, res, next) => {
+    /*  #swagger.tags = ['Events']
+       #swagger.description = 'Endpoint to get specific event information.' */
     const event = await Event.findById(req.params.id)
     // const event = events.find(e => e._id === parseInt(req.params.id))
     if(event !== undefined){
@@ -26,6 +30,8 @@ exports.getEventById = async (req, res, next) => {
 }
 
 exports.getLastEvent = async (req, res, next) => {
+    /*  #swagger.tags = ['Events']
+       #swagger.description = 'Endpoint to get last event information.' */
     try{
         const events = await Event.find()
         const last = events.filter((evt) => new Date(evt.date).getTime() < new Date.getTime())

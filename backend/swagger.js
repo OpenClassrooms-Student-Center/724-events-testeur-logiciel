@@ -46,7 +46,7 @@ const doc = {
             name: "John",
             surname: "Doe",
             email: "johndoe@test.tld",
-            date: new Date("2022-04-29T20:28:45.744Z"),
+            date: "2022-04-29T20:28:45.744Z",
         }
 
 

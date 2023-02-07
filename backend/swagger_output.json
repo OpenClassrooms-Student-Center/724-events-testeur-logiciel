@@ -25,7 +25,10 @@
   "paths": {
     "/events/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Events"
+        ],
+        "description": "Endpoint to get all events information.",
         "parameters": [],
         "responses": {
           "200": {
@@ -39,7 +42,10 @@
     },
     "/events/last": {
       "get": {
-        "description": "",
+        "tags": [
+          "Events"
+        ],
+        "description": "Endpoint to get last event information.",
         "parameters": [],
         "responses": {
           "200": {
@@ -53,7 +59,10 @@
     },
     "/events/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Events"
+        ],
+        "description": "Endpoint to get specific event information.",
         "parameters": [
           {
             "name": "id",
@@ -74,8 +83,21 @@
     },
     "/contact/": {
       "post": {
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Contact"
+        ],
+        "description": "Endpoint to send a contact information.",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Contact information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -88,8 +110,21 @@
     },
     "/inscription/": {
       "post": {
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Inscription"
+        ],
+        "description": "Endpoint to send a Inscription information.",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Inscription information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Inscription"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -199,8 +234,8 @@
           "example": "johndoe@test.tld"
         },
         "date": {
-          "type": "object",
-          "properties": {}
+          "type": "string",
+          "example": "2022-04-29T20:28:45.744Z"
         }
       }
     }
