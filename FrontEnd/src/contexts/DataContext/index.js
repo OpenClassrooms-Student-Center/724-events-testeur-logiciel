@@ -21,9 +21,7 @@ export const api = {
     const data = {}
     const json = await fetch("http://localhost:8080/api/events");
     data.events =  await json.json();
-    console.log('filter', data.events.filter(evt => new Date(evt.date).getTime() > Date.now ))
     data.focus = data.events.filter(evt => (new Date(evt.date)).getTime() > Date.now() )
-    console.log(data);
     data.last = getLastEvent(data.events)
     return data
   },

@@ -22,7 +22,6 @@ const Page = () => {
       setLast(data.last);
     }
   }, [data]);
-  console.log('last', last)
   return <>
     <header>
       <Menu />

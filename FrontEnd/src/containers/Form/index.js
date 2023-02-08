@@ -18,7 +18,6 @@ const Form = ({ onSuccess, onError }) => {
       contact.contactType = evt.target[2].value
       contact.email = evt.target[4].value
       contact.message = evt.target[6].value
-        console.log(contact)
       setSending(true);
       // We try to call mockContactApi
       try {

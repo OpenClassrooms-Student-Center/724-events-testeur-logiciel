@@ -46,7 +46,7 @@ const EventList = () => {
           />
           <div id="events" className="ListContainer">
             {filteredEvents.map((event) => (
-                <Link to={`/event/${event.id}`} >
+                <Link key={event.id} to={`/event/${event.id}`} >
                   <EventCard
                       imageSrc={event.cover}
                       title={event.title}
