@@ -25,7 +25,7 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <Link to={`/event/${event.id}`} className={`SlideCard SlideCard--${
+        <Link key={`slide-${event.id}`}to={`/event/${event.id}`} className={`SlideCard SlideCard--${
             index === idx ? "display" : "hide"
         }`}>
           <div
@@ -45,7 +45,7 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={`${Math.random()*100}`}
                   type="radio"
                   name="radio-button"
                   checked={idx === radioIdx}
