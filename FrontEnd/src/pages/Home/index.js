@@ -28,7 +28,7 @@ const Page = () => {
     </header>
     <main>
       <section className="SliderContainer">
-        <Slider />
+        {data ? <Slider /> : <p>chargement</p>}
       </section>
       <section id="nos-services" className="ServicesContainer">
         <h2 className="Title">Nos services</h2>
