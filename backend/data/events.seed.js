@@ -7,7 +7,6 @@ mongoose.connect(`mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGOD
         useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie pour seed !'))
     .catch(() => console.log('Connexion à MongoDB échouée pour seed !'));
-const date = new Date(Date.now());
 const seedEvents = [
     {
         type: "conférence",
@@ -298,7 +297,7 @@ const seedEvents = [
     {
         title: "World economic forum",
         description: "Oeuvre à la coopération entre le secteur public et le privé.",
-        date: new Date(date.setMonth(date.getMonth()+2)),
+        date: new Date("2027-04-24T20:28:45.744Z"),
         cover: `http://localhost:${process.env.PORT}/images/evangeline-shaw-nwLTVwb7DbU-unsplash1.jpg`,
         type: "world forum",
         nb_guest: 1200,
@@ -314,7 +313,7 @@ const seedEvents = [
     {
         title: "conférence",
         description: "Conférences sur le design de demain dans le digital",
-        date: new Date(date.setMonth(date.getMonth()+1)),
+        date: new Date("2027-05-14T20:28:45.744Z"),
         cover: `http://localhost:${process.env.PORT}/images/teemu-paananen-bzdhc5b3Bxs-unsplash1.jpg`,
         type: "world forum",
         nb_guest: 800,
@@ -329,7 +328,7 @@ const seedEvents = [
     {
         title: "Sneakercraze market",
         description: "Rencontres de spécialistes des Sneakers Européens.",
-        date: new Date(date.setMonth(date.getMonth()+1)),
+        date: new Date("2027-06-10T20:28:45.744Z"),
         cover: `http://localhost:${process.env.PORT}/images/jakob-dalbjorn-cuKJre3nyYc-unsplash1.jpg`,
         type: "Marché",
         nb_guest: 2000,
